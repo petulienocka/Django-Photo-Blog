@@ -1,0 +1,34 @@
+
+{% extends "base.html"%}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-1 pull-right" style="margin-top: 50px">
+<a href="#" title= {{ user }} data-toggle="popover" data-content={{ user.email }} > <i class="fas fa-user " style="width: 50px; font-size: 25px; color: black"></i></a>
+</div>
+
+<div class ="col-sm-6 col-sm-offset-3">
+<h1>My Photography </h1>
+
+<hr>
+<form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+{{ form|crispy  }}
+
+<input type="submit" class="btn btn-default" value="Add Photo">
+</form>
+
+
+</div>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+
+
+{% endblock %}
+

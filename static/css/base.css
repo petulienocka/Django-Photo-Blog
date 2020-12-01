@@ -1,0 +1,48 @@
+body {
+  background-color: whitesmoke;
+  font: 400 15px Lato, sans-serif;
+  line-height: 1.8;
+}
+
+h1 {
+  color: rgb(218, 108, 18);
+}
+
+h3 {
+  color: rgb(218, 108, 18);
+}
+
+.jumbotron {
+  background-image: linear-gradient(rgb(34, 34, 34), rgb(66, 66, 66));
+  color: #fff;
+  padding-bottom: 100px;
+  font-family: Montserrat, sans-serif;
+  width: 100%;
+}
+
+.navbar {
+  margin-bottom: 0;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
+  font-family: Montserrat, sans-serif;
+}
+.navbar li a {
+  color: #fff !important;
+}
+
+.navbar .navbar-brand {
+  color: rgb(218, 108, 18) !important;
+}
+
+.navbar-nav li a:hover,
+.navbar-nav li.active a {
+  color: rgb(218, 108, 18) !important;
+  background-color: #fff !important;
+}
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: #fff !important;
+}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href='{% static "../static/css/photo_files.css" %}' />
+{% block content %}
+
+ <div class="jumbotron min-vh-100 text-center  d-flex flex-column justify-content-center">
+        <img src="../static/images/logo.png" style="width: 20%">
+        <h3>Inspiration, Creativity, Talent</h3>
+<br>
+        <p><small>Join us and share your work with other talented photographers.</small></p> 
+<hr>
+        <form method="GET" action="">
+        <div class="col-sm-6 col-sm-offset-3">   
+        <div class="input-group" style= "box-shadow: 1px 1px 15px rgb(218, 108, 18);">
+            <input class="form-control"  type="text" name="q" placeholder="What are you loking for?" value="{{ request.GET.q }}"/>
+                <div class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="search" />
+                </div>
+        </div>
+        </div>
+        </form>
+   
+</div>
+
+
+
+<div class="container">
+    
+    <div class="row">
+      {% for obj in object_file %}
+        <div class="col-sm-12 col-lg-4">
+        <div class="card">
+            {% if obj.photo %}
+            <img src="{{ obj.photo.url }}"  class="img-rounded" style="max-width: 100%"/>
+            {% endif %}
+                <h1><a style="color:rgb(218, 108, 18) " href='{{ obj.get_absolute_url }}'>{{ obj.title }} </a><br/></h1>
+                    <p><strong >Author : </strong>{{ obj.user }}</p>
+                    <p>Created : {{ obj.time }}</p>
+                    <p><a style="color: rgb(218, 108, 18); background-color: rgb(49, 51, 53)" href="{{ obj.get_absolute_url }}" class="btn" role="button">View</a></p>
+        </div>
+        <hr>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+    <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+
+</div>
+</div>
+
+{% endblock content %}
+
+

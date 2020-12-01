@@ -1,0 +1,70 @@
+{% load static %}
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href='{% static "../static/css/base.css" %}' />
+<link href='{% static "../static/css/navbar.css" %}' rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/6e0e6df0b8.js" crossorigin="anonymous"></script>
+<title>{% block title %}Photo Blog{% endblock title %}</title>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0"></script>
+
+<nav class="navbar navbar-inverse fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="/blog/">PhotoBlog</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+    {% if not request.user.is_authenticated%}
+      <ul class="nav navbar-nav navbar-right">
+        <li ><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+        <li><a href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+    {% else %}
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/blog/create">Profile</a></li>
+      <li><a href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+      </ul>
+      {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+{% if messages %}
+<div class="container">
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}
+
+<div class="container">
+{% block content %}{% endblock content %}
+</div>
+
+
+
+
+</body>
+</html>
+
+<!--
+ JS, Popper.js, and jQuery 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->

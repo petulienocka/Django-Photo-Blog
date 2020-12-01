@@ -1,0 +1,113 @@
+<div class="container-fluid>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="inam" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row">
+                            {% for obj in object_file %}
+                                <div class="col-sm-12 col-lg-4"
+                                    <div class="card">
+                                    {% if obj.photo %}
+                                        <img src="{{ obj.photo.url }}"  class="img-responsive fit-image img-rounded"/>
+                                    {% endif %}
+                                    <div class="card-body">
+                                     <h1 class="card-title><a style="color:rgb(218, 108, 18) " href='{{ obj.get_absolute_url }}'>{{ obj.title }} </a><br/></h1>
+                                    <p>Updated: {{ obj.updated }}</p>
+                    <p>Created:{{ obj.time }}</p>
+                        <p><a style="color: rgb(218, 108, 18); background-color: rgb(49, 51, 53)" href="{{ obj.get_absolute_url }}" class="btn" role="button">View</a></p>
+                                    </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+//// OLD 
+
+<div class ="col-sm-6 col-sm-offset-3">
+{% for obj in object_file %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="thumbnail">
+        {% if obj.photo %}
+        <img src="{{ obj.photo.url }}"  class="img-responsive fit-image img-rounded"/>
+        {% endif %}
+            <div claass="caption">
+                <h1><a style="color:rgb(218, 108, 18) " href='{{ obj.get_absolute_url }}'>{{ obj.title }} </a><br/></h1>
+                    <p>Updated: {{ obj.updated }}</p>
+                    <p>Created:{{ obj.time }}</p>
+                        <p><a style="color: rgb(218, 108, 18); background-color: rgb(49, 51, 53)" href="{{ obj.get_absolute_url }}" class="btn" role="button">View</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+///// NEW
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="inam" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="container">
+                            <div class="row">
+                            {% for obj in object_file %}
+                                <div class="col-sm-12 col-lg-4"
+                                    <div class="card" >
+                                    {% if obj.photo %}
+                                        <img src="{{ obj.photo.url }}"  class="img-rounded" style="max-width: 100%"/>
+                                    {% endif %}
+                                    <div class="card-body">
+                                     <h1 class="card-title">
+                                     <a style="color:rgb(218, 108, 18) " href='{{ obj.get_absolute_url }}'>{{ obj.title }} </a><br/></h1>
+                                    <p>Updated: {{ obj.updated }}</p>
+                                    <p>Created:{{ obj.time }}</p>
+                                    <p><a style="color: rgb(218, 108, 18); background-color: rgb(49, 51, 53)" href="{{ obj.get_absolute_url }}" class="btn" role="button">View</a></p>
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+///// JUMBO 
+
+    <div class="jumbotron min-vh-100 text-center  d-flex flex-column justify-content-center" >
+        <img src="../static/images/logo.png" style="width: 20%">
+        <h3>Inspiration, Creativity, Talent</h3>
+<br>
+        <p><small>Join us and share your work with other talented photographers.</small></p> 
+<hr>
+        <form method="GET" action="">
+        <div class="col-sm-6 col-sm-offset-3">   
+        <div class="input-group" style= "box-shadow: 5px 5px 25px rgb(218, 108, 18);">
+            <input class="form-control"  type="text" name="q" placeholder="What are you loking for?" value="{{ request.GET.q }}"/>
+                <div class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="search" />
+                </div>
+        </div>
+        </div>
+        </form>
+    </div>

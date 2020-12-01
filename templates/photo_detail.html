@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+<div class="container">
+    <h1>{{ title }} </h1>
+    </br>
+        <div class="row">
+            <div class="col-sm-6">
+            {% if instance.photo %}
+            <img src="{{ instance.photo.url }}"  class="img-responsive img-rounded "/>
+            {% endif %}
+            </br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+            <p><strong>Author:</strong> {{ instance.user}}</p>
+                    </div>
+                    <div class="col-sm-4">
+            <p><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div></p>
+                   </div> 
+                </div>
+            </div>
+            <p><small class="text-muted">Updated : {{ instance.updated }}</small></p>
+            <p><small class="text-muted">Created :{{ instance.time }}</small></p>
+            <hr>
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-dark" href="{% url 'photo_update' id=instance.id%}"><i class="fas fa-edit" style="color: rgb(218, 108, 18); font-size: 20px"></i></a>
+            <a class="btn btn-dark" href="{% url 'photo_delete' id=instance.id%}"><i class="fas fa-trash" style="color: rgb(218, 108, 18); font-size: 20px"></i></a>
+            {% endif %}
+        </div>
+        <div class="col-sm-6">
+<br>
+            
+            {{instance.comments.all}}
+            
+            <p class="lead">Comments</p>
+            {% if request.user.is_authenticated%}
+            <form method="POST" action="."> {% csrf_token %}
+                {{ socialmedia_form}}
+                <input type="submit" value="Post" class="btn btn-default">
+            </form>
+            {% else %}
+            <p>Please login first</p>
+            {% endif %}
+<hr/>
+
+            {% for comment in comments %}
+
+        <div class="container">
+        <blockquote>
+            {{ comment.content }}  
+            <footer>Author : {{comment.user}} | Posted :{{comment.time | timesince }} ago </footer>
+            
+        </blockquote>
+
+            
+        </div>
+
+{% endfor %}
+    </div>
+  </div>
+</div>
+
+<!--
+<div class ="col-sm-6 col-sm-offset-3">
+    {% if instance.photo %}
+        <img src="{{ instance.photo.url }}"  class="img-responsive img-rounded "/>
+    {% endif %}
+        <h1>{{ title }} </h1>
+        <p><strong>Author:</strong> {{ instance.user}}</p>
+        <p><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div></p>
+<br>
+        <p><small class="text-muted">Updated : {{ instance.updated }}</small></p>
+        <p><small class="text-muted">Created :{{ instance.time }}</small></p>
+
+<hr/>
+
+    <div>
+        {{instance.comments.all}}
+            <p class="lead">Comments</p>
+            <form method="POST" action="."> {% csrf_token %}
+                {{ socialmedia_form}}
+                <input type="submit" value="Post" class="btn btn-default">
+            </form>
+
+<hr/>
+
+{% for comment in comments %}
+
+        <div class="">
+            {{ comment.content }}
+            {{comment.user}} {{comment.time | timesince }} ago
+        </div>
+
+{% endfor %}
+
+    </div>
+</div>
+-->
+{% endblock %}
+
+
+
+</body>
+</html>
